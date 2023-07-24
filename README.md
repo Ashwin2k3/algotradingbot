@@ -55,6 +55,37 @@ The trading strategy implemented in this bot is a trend-following strategy that 
    - The bot uses the MACD indicator to further confirm the trend direction.
    - A positive MACD value suggests a bullish trend, indicating a potential buy signal.
    - A negative MACD value suggests a bearish trend, indicating a potential sell signal.
+  
+
+## Technical Indicators Used
+
+- **Exponential Moving Average (EMA)**:
+  - EMA of length 200 and EMA of length 10 are used to analyze the trend direction.
+  - A rising EMA suggests an uptrend, while a falling EMA suggests a downtrend.
+
+- **RSI (Relative Strength Index)**:
+  - RSI is used to determine whether the instrument is overbought (RSI > 70) or oversold (RSI < 30).
+  - RSI values above 70 indicate overbought conditions and are considered a potential sell signal.
+  - RSI values below 30 indicate oversold conditions and are considered a potential buy signal.
+
+- **MACD (Moving Average Convergence Divergence)**:
+  - MACD provides bearish and bullish signals at crossovers of two moving averages.
+  - A positive MACD value indicates a bullish trend, while a negative value indicates a bearish trend.
+
+## Basic Trading Logic
+
+- **Bullish Signal / Signal to Sell**:
+  - If RSI is greater than or equal to 60, EMA is "SELL," and MACD is greater than 0 or MACD(26) crosses MACD(12), it generates a bullish signal or a signal to sell.
+  - TAKE_PROFIT is set as CURRENT_PRICE + 8.
+  - TAKE_LOSS is set as CURRENT_PRICE - 5.
+  - If CURRENT_PRICE is greater than or equal to TAKE_PROFIT or less than or equal to TAKE_LOSS, the bot executes "selling x quantity."
+
+- **Bearish Signal / Signal to Buy**:
+  - If RSI is less than or equal to 40, EMA is "BUY," and MACD is less than 0, it generates a bearish signal or a signal to buy.
+  - If RSI is between 30 and 40, and EMA is "BUY," the bot also executes "buying x quantity."
+
+- **Signal to Sell**:
+  - If RSI is greater than or equal to 50, and EMA is "SELL," the bot executes "selling x quantity."
 
 ## How the Bot Works
 
